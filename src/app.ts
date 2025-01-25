@@ -1,10 +1,6 @@
-import express from "express";
+import Server from "./index";
 
-const app = express();
-
-app.get("/", (req, res) => {
-    res.send("Hello World");
-})
-
-
-export default app;
+(async () => {
+  const server = new Server();
+  await server.initializeServer();
+})();
