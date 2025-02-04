@@ -5,6 +5,7 @@ import cors from "cors";
 import user_router from "./routes/users.route";
 import handleErrors from "./middlewares/error.middleware";
 import role_router from "./routes/role.route";
+import permission_router from "./routes/permissions.route";
 
 class Server {
   app: express.Application;
@@ -32,6 +33,7 @@ class Server {
   initializeRoutes() {
     this.app.use("/", user_router);
     this.app.use("/", role_router);
+    this.app.use("/", permission_router);
     this.app.use(handleErrors);
   }
 

@@ -1,7 +1,7 @@
 import { NextFunction } from "express";
 /**
  * Si el usuario es admin, podra realizar todas las operaciones
- * Si el usuariuo es editor, podra crear, leer y actualizar usuarios
+ * Si el usuario es editor, podra crear, leer y actualizar usuarios, pero no crear user admin
  * Si el usuario es lector, podra leer los usuarios
  */
 
@@ -22,7 +22,7 @@ class UserController {
 
   static async getUsers(req: Request, res: Response, next: NextFunction) {
     try {
-      throw new HttpException(400, "error");
+      throw new HttpException(400, "Error testing");
     } catch (error) {
       next(error);
     }

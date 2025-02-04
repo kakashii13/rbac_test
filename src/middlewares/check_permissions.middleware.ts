@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import Role_service from "../services/role.service";
 
-async function checkPermissions(permission: string) {
+function checkPermissions(permission: string) {
   return async (req: Request, res: Response, next: NextFunction) => {
     const { user } = req.body;
 
@@ -10,5 +10,8 @@ async function checkPermissions(permission: string) {
     // if(role_permissions.includes(permission)){
 
     // }
+    next();
   };
 }
+
+export default checkPermissions;

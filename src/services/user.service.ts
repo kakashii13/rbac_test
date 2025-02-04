@@ -8,7 +8,7 @@ class UserService {
       const password_encripted = bcrypt.hash(password, 10);
 
       // get role id
-      const role_db = RoleService.getRole(role);
+      const role_db = await RoleService.getRole(role);
 
       console.log(role_db);
 
