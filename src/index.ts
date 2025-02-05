@@ -6,6 +6,7 @@ import user_router from "./routes/users.route";
 import handleErrors from "./middlewares/error.middleware";
 import role_router from "./routes/role.route";
 import permission_router from "./routes/permissions.route";
+import "./models/associations";
 
 class Server {
   app: express.Application;
@@ -18,6 +19,7 @@ class Server {
   async testDatabaseConnection() {
     try {
       await sequelize.authenticate();
+      await sequelize.sync();
       console.log("Connection has been established successfully.");
     } catch (error) {
       console.error("Unable to connect to the database:", error);

@@ -8,10 +8,10 @@ const role_router = Router();
 // El unico role que puede crear roles es el "admin"
 role_router.post(
   "/role",
-  // checkUser,
-  // checkPermissions("role_create"), // <- check permissions of user role
+  checkUser,
+  checkPermissions("create_role"), // <- check permissions of user role
   (req: Request, res: Response, next: NextFunction) => {
-    RoleController.createRole(req, res, next);
+    // RoleController.createRole(req, res, next);
   }
 );
 

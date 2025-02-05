@@ -1,7 +1,9 @@
+import Permission from "../models/permission.model";
 import Role from "../models/role.model";
 import Role_permission from "../models/role_permission.model";
 import HttpException from "../utils/http_exception";
 import PermissionService from "./permission.service";
+import "../models/associations";
 
 // Al crear el role, deberian crearse los permisos que posee
 // Permisos admin
@@ -49,20 +51,28 @@ class Role_service {
       return created;
     } catch (error) {
       console.log(error);
-      throw new HttpException(400, error);
+      throw new HttpException(500, error);
     }
   }
 
   static async getPermissions(role_id: string) {
     try {
-      const role_permission = await Role_permission.findAll({
-        where: { role_id: role_id },
+      const role = await Role.findAll({
+        where: { id: role_id },
+        include: {
+          model: Permission,
+          attributes: ["name"],
+          through: { attributes: [] },
+        },
+        raw: true,
+        nest: true,
       });
 
-      console.log(role_permission);
-      //   return role_permission.map((p) => p.permission_id);
+      const role_permissions = role.map((r: any) => r.Permissions.name);
+      return role_permissions;
     } catch (error) {
-      throw new Error("Internal server error.");
+      console.log(error);
+      throw new HttpException(500, error);
     }
   }
 

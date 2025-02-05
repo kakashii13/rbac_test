@@ -1,22 +1,19 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db";
 
-const RolePermission = sequelize.define("Role_permission", {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
+const RolePermission = sequelize.define(
+  "Role_permission",
+  {
+    role_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    permission_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
-  role_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  permission_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-});
-
-RolePermission.sync();
+  { timestamps: false }
+);
 
 export default RolePermission;
